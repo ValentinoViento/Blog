@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} Iniciar Sesión {% endblock %}</title>
+<!--{%load static %}
+    #<link rel="stylesheet" href="{% static 'pages/styles.css' %}"> -->
+</head>
+<body>
+    <h2>Iniciar sesión</h2>
+    <form method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"> Iniciar sesión</button>
+    </form>    
+    <br><br><br>
+
+    <p>No tienes cuenta? <a href="{% url 'registro'%}"></a></p>
+
+    <footer>
+        <i>&copy Integrador etc</i>
+    </footer>
+
+</body>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} Trabajo Práctico III {% endblock %}</title>
+    {%load static %}
+    <link rel="stylesheet" href="{% static 'blog/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="usuario"></div>
+            {%if user.is_authenticated %}
+                <p>Hola {{user.username}}</p>
+                <a href="{%url 'logout'%}">Log out</a>
+            {% else %}
+                <p>No estas logging</p>
+                <a href="{%url 'login'%}">Log in</a>
+            {% endif %}
+            <br>
+            <a href="{% url 'registro'%}">Registrarse</a>
+        </div>
+
+        {% include "navbar.html" %}
+
+        <div class="header-título"></div>
+            {% block header %}<div class="notas">🎼♫🎸♪♬</div>Bienvenidos al blog musical<div class="notas">🎼♫🎸♪♬</div>{% endblock %}
+        </div>
+    
+    </header>
+    
+    
+    <div class="content">
+        {%block content%}{%endblock%}
+    </div>
+
+    <br><br><br>
+
+    <footer>
+        <i>&copy Music Copyright. All rights reserved.</i>
+    </footer>
+
+</body>
+
+
+</html>

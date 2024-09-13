@@ -16,12 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from pages.views import RegistroUsuario
+from blog.views import RegistroUsuario
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include ('pages.urls')),
+    path('', include ('blog.urls')),
     path('accounts/', include('django.contrib.auth.urls')), #login,logout
-    path('mensajes/', include('pages.urls')),
     path('registro/', RegistroUsuario.as_view(), name='registro'),
 ]

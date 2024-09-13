@@ -1,31 +1,54 @@
 /* Contenedor para el encabezado */
 header {
     display: flex;
-    justify-content: space-between; /* Distribuye el espacio entre los elementos */
-    align-items: center; /* Alinea verticalmente los elementos */
-    padding: 10px; /* Agrega relleno alrededor del encabezado */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(57, 126, 187);
 }
 
-/* Estilo de la barra de navegación */
-.navbar {
-    width: 200px; /* Establece un ancho fijo para la barra de navegación */
+.header-titulo {
+    align-items: center;
 }
 
-/* Estilo de la información del usuario */
-.usuario {
-    margin-left: auto; /* Empuja la información del usuario hacia la derecha */
-}
+.usuario{
+    align-items: right;
 
-/* Estilo del encabezado de bloque */
-.header-título {
-    flex-grow: 1; /* Permite que el encabezado de bloque ocupe el espacio restante */
-    text-align: center; /* Centra el texto */
 }
 
 
 
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
+  }
+  
+  nav li {
+    margin: 0 10px;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  nav a:hover {
+    background-color:  
+  #555;
+  }
 
 
+
+  body {
+    background-color: #44a2d86e;
+    font-family: Arial;
+}
 
 
 footer {

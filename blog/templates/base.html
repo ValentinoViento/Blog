@@ -7,29 +7,32 @@
     {%load static %}
     <link rel="stylesheet" href="{% static 'blog/styles.css' %}">
 </head>
-<body>
+
+<body>   
+
     <header>
-        <div class="usuario"></div>
-            {%if user.is_authenticated %}
-                <p>Hola {{user.username}}</p>
-                <a href="{%url 'logout'%}">Log out</a>
+        <nav class="navbar">
+            </nav>
+    
+        <div class="header-titulo">
+            </div>
+    
+        <div class="usuario">
+            {% if user.is_authenticated %}
+                Hola {{ user.username|capfirst }}
+                <a href="{% url 'logout' %}">Cerrar Sesión</a>
             {% else %}
-                <p>No estas logging</p>
-                <a href="{%url 'login'%}">Log in</a>
+                Hola anónimo/a
+                <a href="{% url 'login' %}">Iniciar Sesión</a>
             {% endif %}
-            <br>
-            <a href="{% url 'registro'%}">Registrarse</a>
+            <br><br>    
+            <a href="{% url 'registro' %}">¿No tienes una cuenta? Ingresa aquí</a>
         </div>
-
-        {% include "navbar.html" %}
-
-        <div class="header-título"></div>
-            {% block header %}<div class="notas">🎼♫🎸♪♬</div>Bienvenidos al blog musical<div class="notas">🎼♫🎸♪♬</div>{% endblock %}
-        </div>
-    
     </header>
+
+    {% include "navbar.html" %}
     
-    
+
     <div class="content">
         {%block content%}{%endblock%}
     </div>

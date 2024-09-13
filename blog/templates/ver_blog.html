@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+
+{% block title %} Blog completo {%endblock%}
+
+{%block header%}<h1>🎼♫🎸♪♬Bienvenidos/as al blog musical</h1>{%endblock%}
+
+{%block content%}
+    {% for blog in blog %}
+        <li>
+            Autor {{blog.autor}}
+            Título {{blog.titulo}} 
+            <br>{{blog.texto}}
+        </li>
+    {% endfor %}
+{%endblock%}

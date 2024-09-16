@@ -11,11 +11,12 @@
 <body>   
 
     <header>
-        <nav class="navbar">
-            </nav>
+        {% include "navbar.html" %}
     
         <div class="header-titulo">
-            </div>
+            <!-- Título centrado -->
+            <h1>Bienvenidos al blog musical</h1>
+        </div>
     
         <div class="usuario">
             {% if user.is_authenticated %}
@@ -25,12 +26,12 @@
                 Hola anónimo/a
                 <a href="{% url 'login' %}">Iniciar Sesión</a>
             {% endif %}
-            <br><br>    
+            <br><br>
             <a href="{% url 'registro' %}">¿No tienes una cuenta? Ingresa aquí</a>
         </div>
     </header>
 
-    {% include "navbar.html" %}
+    
     
 
     <div class="content">

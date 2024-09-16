@@ -1,47 +1,46 @@
-/* Contenedor para el encabezado */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: rgb(57, 126, 187);
+  display: flex;
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  align-items: center; /* Alinea verticalmente los elementos */
+  padding: 10px;
+  background-color: rgb(57, 126, 187);
 }
 
+/* Estilo para el título */
 .header-titulo {
-    align-items: center;
+  flex: 1; /* Permite que el título ocupe el espacio restante */
+  text-align: center; /* Centra el texto del título */
 }
 
-.usuario{
-    align-items: right;
-
+/* Estilo para la información del usuario */
+.usuario {
+  margin-left: auto; /* Empuja el contenido de usuario hacia la derecha */
+  text-align: right; /* Alinea el texto a la derecha */
 }
 
-
-
+/* Estilos para la barra de navegación */
 nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #333;
-    padding: 10px;
-  }
-  
-  nav li {
-    margin: 0 10px;
-  }
-  
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  
-  nav a:hover {
-    background-color:  
-  #555;
-  }
+  list-style: none;
+  display: flex;
+  justify-content: flex-start; /* Alinea los enlaces a la izquierda */
+  padding: 0; /* Elimina el padding por defecto */
+  margin: 0; /* Elimina el margen por defecto */
+}
+
+nav li {
+  margin: 0 10px; /* Espaciado entre los elementos de la lista */
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+nav a:hover {
+  background-color: #555; /* Color de fondo al pasar el ratón */
+}
 
 
 

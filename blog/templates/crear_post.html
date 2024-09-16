@@ -2,11 +2,14 @@
 
 {% block title %} Crear Post {%endblock%}
 
+
 {%block header%}<h1>Muestra al blog tus gustos musicales</h1>{%endblock%}
 
-{%block content%}
-    <form method="post"> {% csrf_token %}
-        {{ form.as_p}}
-        <input type="submit" value="Save">
+{% block content %}
+    <form method="post" enctype="multipart/form-data">  <!-- Agregar archivos con enctype y enviarlos al formulario -->
+        {% csrf_token %}
+        {{ form.titulo }}
+        {{ form.texto}}        <!--formulario especifico de ckeditor-->
+        <input type="submit" value="Guardar">
     </form>
-{%endblock%}
+{% endblock %}

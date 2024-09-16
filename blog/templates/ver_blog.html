@@ -5,11 +5,13 @@
 {%block header%}<h1>🎼♫🎸♪♬Bienvenidos/as al blog musical</h1>{%endblock%}
 
 {%block content%}
-    {% for blog in blog %}
+    {% for blog in object_list %}
+    <ul>
         <li>
-            Autor {{blog.autor}}
-            Título {{blog.titulo}} 
-            <br>{{blog.texto}}
+            <b>{{blog.autor|capfirst}}</b>
+            <br><i>Título:</i> <b>{{blog.titulo}}</b> 
+            <br><br>{{blog.texto}}<br><br><br>
         </li>
+    </ul>
     {% endfor %}
 {%endblock%}

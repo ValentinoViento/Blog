@@ -20,14 +20,14 @@
     
         <div class="usuario">
             {% if user.is_authenticated %}
-                Hola {{ user.username|capfirst }}
+                Hola {{ user.username|capfirst }}<br>
                 <a href="{% url 'logout' %}">Cerrar Sesión</a>
             {% else %}
                 Hola anónimo/a
                 <a href="{% url 'login' %}">Iniciar Sesión</a>
+                <a href="{% url 'registro' %}">¿No tienes una cuenta? Ingresa aquí</a>
             {% endif %}
             <br><br>
-            <a href="{% url 'registro' %}">¿No tienes una cuenta? Ingresa aquí</a>
         </div>
     </header>
 

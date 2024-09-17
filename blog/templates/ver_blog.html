@@ -10,7 +10,7 @@
         <li>
             <b>{{blog.autor|capfirst}}</b>
             <br><i>Título:</i> <b>{{blog.titulo}}</b> 
-            <br><br>{{blog.texto}}<br><br><br>
+            <br><br>{{blog.texto|safe}}<br><br><br>
         </li>
     </ul>
     {% endfor %}

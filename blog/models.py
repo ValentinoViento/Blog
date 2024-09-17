@@ -6,8 +6,6 @@ class Blog(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=200)
     texto = RichTextField()
-    # video = models.URLField(blank=True, null=True)  # Para enlace video
-    # imagen = models.ImageField(upload_to='imagenes/', blank=True, null=True)  # Para imágenes
 
     def __str__(self):
         return self.titulo

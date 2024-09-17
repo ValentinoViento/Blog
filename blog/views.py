@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Blog
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from ckeditor.widgets import CKEditorWidget
+from ckeditor.widgets import CKEditorWidget # type: ignore
 # Create your views here.
 
 class RegistroUsuario(CreateView):
@@ -26,10 +26,16 @@ class CrearPost(LoginRequiredMixin, CreateView):
     template_name = 'crear_post.html'
     success_url = reverse_lazy('mis_posts')
 
-    def get_form(self):
-        form = super().get_form()
-        form.fields['texto'].widget = CKEditorWidget()
-        return form
+    def form_valid(self, form):
+        form.instance.autor = self.request.user  # Asignar el usuario actual como autor
+        return super().form_valid(form)
+
+
+
+    # def get_form(self):
+    #     form = super().get_form()
+    #     form.fields['texto'].widget = CKEditorWidget()
+    #     return form
 
 
 class VerBlog(ListView):
@@ -45,26 +51,23 @@ class MisPosts(LoginRequiredMixin, ListView):
     template_name = 'mis_posts.html'
 
     def get_queryset(self):
-        return Blog.objects.filter(autor=self.request.user) #filtra por los objetos propios de cada usuario
-    
+        return Blog.objects.filter(autor=self.request.user)
+
     def post(self, request):
-        seleccion = request.POST.getlist('seleccion')   #selecciona mediante id
-        Blog.objects.filter(pk__in=seleccion, autor=request.user).delete()      #borra los seleccionados, siendo post propios de el usuario
-        return redirect('mis_posts')    #redirige y se queda con sus posts sin eliminar
-    
-    
-class EliminarPosts(LoginRequiredMixin, DeleteView):
-    model = Blog
-    template_name = 'confirmar_eliminacion.html'
-    success_url = reverse_lazy('mis_posts')
+        seleccion = request.POST.getlist('seleccion')
+        
+        if request.POST.get("confirmar_eliminacion"):   # Verifica si se selecciona el boton para eliminar
+            Blog.objects.filter(pk__in=seleccion, autor=self.request.user).delete()     #utiliza pk para eliminar los seleccionados por el usuario
+            return redirect('mis_posts') 
 
-    def get_object(self, queryset=None):
-        return get_object_or_404(Blog, pk=self.kwargs['pk'], autor=self.request.user) #si encuentra el objeto, consigue su "pk" para decidir eliminarlo
+        else:
+            # Obtener los objetos Blog correspondientes a los IDs seleccionados
+            posts_seleccion = Blog.objects.filter(pk__in=seleccion)
+            return render(request, 'confirmar_eliminacion.html', {'posts_seleccion': posts_seleccion})
     
-    #def get_queryset(self):
-    #     return Blog.objects.filter(autor=self.request.user)
 
 
+#https://www.youtube.com/watch?v=zeoT66v4EHg
 
 def home_view(request):
     return render(request, 'home.html')

@@ -6,17 +6,19 @@
 
 
 {% block content %}
-<form method="POST">
+<h1>Mis Posts</h1>
+
+<form method="post">
     {% csrf_token %}
-    {% for post in object_list %}
-        <div>
+    <ul>
+        {% for post in object_list %}
+        <li>
             <input type="checkbox" name="seleccion" value="{{ post.pk }}">
-            <p><b><i>Titulo</b></i> {{ post.titulo }}</p>
-            <p>{{ post.texto }}</p>
-        </div>
-    {% endfor %}
-    <button type="submit" style="width: 150px; height: 45px; font-family: Sans-Serif;">
-        <b>Eliminar seleccionado/s</b>
-    </button>
+            {{ post.titulo }}
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="submit" name="confirmar_eliminacion" value="true">Eliminar seleccionados</button>
 </form>
+
 {% endblock %}

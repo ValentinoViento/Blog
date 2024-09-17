@@ -4,14 +4,17 @@
 
 {%block header%}<h1>🎼♫🎸♪♬Bienvenidos/as al blog musical</h1>{%endblock%}
 
-{%block content%}
+{% block content %}
+    <h2>Muro</h2>
     {% for blog in object_list %}
     <ul>
         <li>
-            <b>{{blog.autor|capfirst}}</b>
-            <br><i>Título:</i> <b>{{blog.titulo}}</b> 
-            <br><br>{{blog.texto|safe}}<br><br><br>
+            <b>{{ blog.autor.username|capfirst }}</b>
+            <br><i>Título:</i> <b>{{ blog.titulo }}</b> 
+            <br><br>{{ blog.texto|safe }}<br><br><br>
         </li>
     </ul>
+    {% empty %}
+        <p>No hay posts disponibles.</p>
     {% endfor %}
-{%endblock%}
+{% endblock %}

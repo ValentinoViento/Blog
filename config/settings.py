@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -122,7 +123,7 @@ USE_TZ = False
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    BASE_DIR / 'blog/static'
 ]
 STATIC_ROOT = BASE_DIR / 'blog/staticfiles'
 
@@ -141,10 +142,15 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_CONFIGS = {
     'default': {
+        'toolbar': 'Full',
         'width': '100%',
-        'height': '300px',
+        'height': 300,
+        'extraPlugins': 'link',  # agregar links
+        'linkShowAdvancedTab': True,  # mostrar links   
+        'linkShowTargetTab': True,  #  target options
     }
 }
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

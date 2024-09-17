@@ -5,11 +5,12 @@
 
 {%block header%}<h1>Muestra al blog tus gustos musicales</h1>{%endblock%}
 
-    {% block content %}
-        <form method="post" enctype="multipart/form-data">  <!-- Agregar archivos con enctype y enviarlos al formulario -->
-            {% csrf_token %}
-                Titulo {{ form.titulo }}<br><br>Texto<br>
-                {{ form.texto }}
-            <input type="submit" value="Guardar">
-        </form>
-    {% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p><b>Título</b></p>{{ form.titulo }}<br><br>
+    <p><b>Contenido</b></p>
+    {{ form.texto|safe }}
+    <br><input type="submit" value="Guardar">
+</form>
+{% endblock %}

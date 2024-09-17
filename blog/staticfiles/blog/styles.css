@@ -1,0 +1,119 @@
+header {
+  display: flex;
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  align-items: center; /* Alinea verticalmente los elementos */
+  padding: 10px;
+  background-color: rgb(57, 126, 187);
+}
+
+/* Estilo para el título */
+.header-titulo {
+  flex: 1; /* Permite que el título ocupe el espacio restante */
+  text-align: center; /* Centra el texto del título */
+}
+
+/* Estilo para la información del usuario */
+.usuario {
+  margin-left: auto; /* Empuja el contenido de usuario hacia la derecha */
+  text-align: right; /* Alinea el texto a la derecha */
+}
+
+/* Estilos para la barra de navegación */
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start; /* Alinea los enlaces a la izquierda */
+  padding: 0; /* Elimina el padding por defecto */
+  margin: 0; /* Elimina el margen por defecto */
+}
+
+nav li {
+  margin: 0 10px; /* Espaciado entre los elementos de la lista */
+}
+
+nav a {
+  color: #181616;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+nav a:hover {
+  background-color: rgba(48, 91, 129, 0.774); /* Color de fondo al pasar el ratón */
+}
+
+
+
+body {
+  background-color: #f0f8ff; /* Color de fondo suave */
+  font-family: Arial, sans-serif; /* Tipografía clara y legible */
+  line-height: 1.6; /* Mejora la legibilidad */
+  margin: 0; /* Elimina márgenes por defecto */
+  padding: 20px; /* Espacio interno */
+}
+
+/* Estilo para el encabezado */
+h1 {
+  text-align: center; /* Centra el título */
+  color: #2c3e50; /* Color del texto */
+  font-size: 2.5em; /* Tamaño de fuente más grande */
+  margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+/* Estilo para la lista de posts */
+ul {
+  list-style-type: none; /* Elimina viñetas */
+  padding: 0; /* Elimina padding */
+}
+
+/* Estilo para cada post */
+li {
+  background-color: #ffffff; /* Fondo blanco para posts */
+  border: 1px solid #dcdcdc; /* Borde ligero */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-bottom: 15px; /* Espacio entre posts */
+  padding: 15px; /* Espacio interno */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilo para el autor */
+b {
+  color: #2980b9; /* Color para el nombre del autor */
+}
+
+/* Estilo para el título */
+i {
+  font-weight: bold; /* Negrita para el título */
+}
+
+/* Estilo para el texto del blog */
+p {
+  margin: 10px 0; /* Espacio entre párrafos */
+  color: #34495e; /* Color de texto para el contenido */
+}
+
+/* Estilo para enlaces */
+a {
+  color: #3c47e7; /* Color de enlaces */
+  text-decoration: none; /* Sin subrayado */
+  transition: color 0.3s; /* Transición suave para el color */
+}
+
+a:hover {
+  color: #ffffff; /* Color al pasar el mouse */
+}
+
+/* Estilo para elementos multimedia */
+img, video {
+  max-width: 100%; /* Hace que las imágenes y videos sean responsivos */
+  height: auto; /* Mantiene la proporción */
+  margin-top: 10px; /* Espacio superior */
+}
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: #ffffff;
+  }

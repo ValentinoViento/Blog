@@ -2,20 +2,19 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-<h2> Confirmando Eliminación </h2>
-<p> ¿Estás seguro de querer eliminar los siguientes posts?</p>
+<h1>Confirmar Eliminación</h1>
+
+<p>¿Estás seguro de que deseas eliminar los siguientes posts?</p>
+
 <ul>
     {% for post in posts_seleccion %}
-        <li>
-            <b><i>Titulo</i></b> {{ post.titulo }}<br>
-            <br>{{ post.texto }}
-        </li>
+    <li>{{ post.titulo }}</li>
     {% endfor %}
 </ul>
 
-<form method='POST'>
+<form method="post">
     {% csrf_token %}
-    <button type="submit" name="confirmar_eliminacion">Confirmar Eliminación</button>
+    <button type="submit" name="confirmar_eliminacion" value="true">Confirmar</button>
 </form>
-<a href="{% url 'mis_posts' %}"> Cancelar </a>
+
 {% endblock %}

@@ -6,19 +6,19 @@
 
 
 {% block content %}
-<h1>Mis Posts</h1>
-
 <form method="post">
     {% csrf_token %}
     <ul>
         {% for post in object_list %}
         <li>
             <input type="checkbox" name="seleccion" value="{{ post.pk }}">
-            {{ post.titulo }}
+            <b>Titulo </b>{{ post.titulo }}
+            <br><br> {{post.texto }}
+            <br><i>Creado {{ post.fechaCreado}}</i>
         </li>
         {% endfor %}
     </ul>
-    <button type="submit" name="confirmar_eliminacion" value="true">Eliminar seleccionados</button>
+    <button type="submit">Eliminar seleccionados</button>
 </form>
-
 {% endblock %}
+

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio Blog Musical{%endblock%}
+
+{% block header %}{{ form.media }}{% endblock %}
+
+
+{% block content %}
+    <h2>{{ blog.titulo }}</h2>
+    <p><b>Autor</b> {{ blog.autor.username|capfirst }}</p>
+    <p>{{ blog.texto|safe }}</p> 
+    <p><br><b><i>Creado</b> {{ blog.fechaCreado}}</i>
+{% endblock %}

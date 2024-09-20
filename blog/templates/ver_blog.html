@@ -5,16 +5,35 @@
 {%block header%}<h1>🎼♫🎸♪♬Bienvenidos/as al blog musical</h1>{%endblock%}
 
 {% block content %}
-    <h2>Muro</h2>
-    {% for blog in object_list %}
+    <h2>Muro del Blog</h2>
     <ul>
-        <li>
-            <b>{{ blog.autor.username|capfirst }}</b>
-            <br><i>Título:</i> <b>{{ blog.titulo }}</b> 
-            <br><br>{{ blog.texto|safe }}<br><br><br>
-        </li>
+        {% for blog in object_list %}
+            <li>
+                <a href="{% url 'blog_contenido' blog.slug %}">
+                    <h2><b>{{ blog.titulo }}</b></h2> 
+                </a>    
+                    <span class="author">Autor: <b>{{ blog.autor.username|capfirst }}</b></span>
+                    <br>
+                    <span class="fecha">Fecha de creación: {{ blog.fechaCreado }}</span>
+                
+            </li>
+        {% empty %}
+            <p>No hay posts disponibles.</p>
+        {% endfor %}
     </ul>
-    {% empty %}
-        <p>No hay posts disponibles.</p>
-    {% endfor %}
+
+    <!--Paginación-->
+    {% if blogs.has_other_pages %}
+        <ul class="paginacion">
+            {% if blogs.has_previous %}
+                <li><a href="?page={{ blogs.previous_page_number }}">Anterior</a></li>
+            {% endif %}
+            {% for page_num in blogs.paginator.page_range %}
+                <li class="{% if page_num == blogs.number %}active{% endif %}"><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+            {% endfor %}
+            {% if blogs.has_next %}
+                <li><a href="?page={{ blogs.next_page_number }}">Siguiente</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
 {% endblock %}

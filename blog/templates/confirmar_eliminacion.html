@@ -8,9 +8,18 @@
 
 <ul>
     {% for post in posts_seleccion %}
-    <li>{{ post.titulo }}</li>
+    <li>
+        <h2>{{ post.titulo }}</h2>
+        <p><b>Autor</b> {{ post.autor.username|capfirst }}</p>
+        <p>{{ post.texto|safe }}</p> 
+        <p><br><b><i>Creado</b> {{ post.fechaCreado}}</i></p>
+    </li>
     {% endfor %}
 </ul>
+
+
+
+
 
 <form method="post">
     {% csrf_token %}

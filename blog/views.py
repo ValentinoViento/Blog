@@ -1,9 +1,8 @@
-from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Blog
+from .models import Blog, Comentarios
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.messages import success
@@ -18,6 +17,7 @@ class RegistroUsuario(CreateView):
     success_url = reverse_lazy('login')
 
 
+#creación de posts
 class BlogForm(forms.ModelForm):
     class Meta:
           model = Blog
@@ -40,22 +40,59 @@ class CrearPost(LoginRequiredMixin, CreateView):
     
 
 
+
+#blog,contenido y comentarios
 class VerBlog(ListView):
     model = Blog
     template_name = 'ver_blog.html'
-    paginate_by = 5
+    paginate_by = 5                     #sólo 5 posts por página
 
     def get_queryset(self):
-        return Blog.objects.all().order_by('-fechaCreado')            #para ver a todos los usuarios y sus posts
+        return Blog.objects.all().order_by('-fechaCreado')            #para ver a todos los usuarios y sus posts en orden por fecha
 
 
 class BlogContenido(DetailView):
     model = Blog
-    template_name = 'blog_contenido.html'          #para poder entrar a cada post y ver su contenido
+    template_name = 'blog_contenido.html'         
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Check if the blog object exists
+        if self.object:
+            # Get all comments associated with the blog post
+            context['comentarios'] = self.object.comentarios.all()
+            # Add the comment form to the context
+            context['form'] = ComentarioForm()
+
+        # Add the blog post content to the context
+        context['blog_content'] = self.object.texto
+
+        return context
+    
+    def post(self, request):
+        self.object = self.get_object()
+        form = ComentarioForm(request.POST)
+        if form.is_valid():                     #verificación para guardar comentarios
+            comentario = form.save(commit=False)
+            comentario.blog  = self.object
+            comentario.autor = request.user  # para la autenticación de cada usuario
+            comentario.save()
+            return redirect('blog_contenido', slug=self.object.slug)
+        return self.render_to_response(self.get_context_data(form=form))
+
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentarios
+        fields = ['texto']
+
+    
 
 
 
 
+#ver tus propios posts y tener la posibilidad de eliminarlos
 class MisPosts(LoginRequiredMixin, View):
     template_name = 'mis_posts.html'
 
@@ -79,6 +116,6 @@ class MisPosts(LoginRequiredMixin, View):
 
 
 
-
+#vista home
 def home_view(request):
     return render(request, 'home.html')

@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.messages import success
 from django_ckeditor_5.widgets import CKEditor5Widget
+from django.core import paginator
 
 
 # Create your views here.
@@ -45,7 +46,7 @@ class CrearPost(LoginRequiredMixin, CreateView):
 class VerBlog(ListView):
     model = Blog
     template_name = 'ver_blog.html'
-    paginate_by = 5                     #sólo 5 posts por página
+    paginate_by = 4                     #sólo 4 posts por página
 
     def get_queryset(self):
         return Blog.objects.all().order_by('-fechaCreado')            #para ver a todos los usuarios y sus posts en orden por fecha
@@ -58,25 +59,20 @@ class BlogContenido(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Check if the blog object exists
-        if self.object:
-            # Get all comments associated with the blog post
-            context['comentarios'] = self.object.comentarios.all()
-            # Add the comment form to the context
+        if self.object:             
+            context['comentarios'] = self.object.comentarios.all()          #mira los objetos con este context en este post
             context['form'] = ComentarioForm()
-
-        # Add the blog post content to the context
-        context['blog_content'] = self.object.texto
-
+        context['blog_content'] = self.object.texto     #agrega el context al post
         return context
     
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
+        # No se necesita el argumento 'slug' aquí
         self.object = self.get_object()
         form = ComentarioForm(request.POST)
-        if form.is_valid():                     #verificación para guardar comentarios
+        if form.is_valid():
             comentario = form.save(commit=False)
-            comentario.blog  = self.object
-            comentario.autor = request.user  # para la autenticación de cada usuario
+            comentario.blog = self.object
+            comentario.autor = request.user
             comentario.save()
             return redirect('blog_contenido', slug=self.object.slug)
         return self.render_to_response(self.get_context_data(form=form))
@@ -86,6 +82,9 @@ class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentarios
         fields = ['texto']
+        widgets = {
+            'blog': forms.HiddenInput(),
+        }
 
     
 

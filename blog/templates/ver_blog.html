@@ -12,7 +12,7 @@
                 <a href="{% url 'blog_contenido' blog.slug %}">
                     <h2><b>{{ blog.titulo }}</b></h2> 
                 </a>    
-                    <span class="author">Autor: <b>{{ blog.autor.username|capfirst }}</b></span>
+                    <span class="author"><b>{{ blog.autor.username|capfirst }}</b></span>
                     <br>
                     <span class="fecha">Fecha de creación: {{ blog.fechaCreado }}</span>
                 
@@ -23,17 +23,21 @@
     </ul>
 
     <!--Paginación-->
-    {% if blogs.has_other_pages %}
-        <ul class="paginacion">
-            {% if blogs.has_previous %}
-                <li><a href="?page={{ blogs.previous_page_number }}">Anterior</a></li>
-            {% endif %}
-            {% for page_num in blogs.paginator.page_range %}
-                <li class="{% if page_num == blogs.number %}active{% endif %}"><a href="?page={{ page_num }}">{{ page_num }}</a></li>
-            {% endfor %}
-            {% if blogs.has_next %}
-                <li><a href="?page={{ blogs.next_page_number }}">Siguiente</a></li>
-            {% endif %}
-        </ul>
+
+    {% if page_obj.has_other_pages %}
+    <div class="paginacion">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            <a href="?page={{ num }}" class="{% if num == page_obj.number %}active{% endif %}">{{ num }}</a>
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </div>
     {% endif %}
+    
 {% endblock %}

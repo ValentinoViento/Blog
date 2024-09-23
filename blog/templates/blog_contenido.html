@@ -8,26 +8,26 @@
 {% block content %}
 
     <h2>{{ blog.titulo }}</h2>
-    <p><b>Autor</b> {{ blog.autor.username|capfirst }}</p>
+    <p><b>{{ blog.autor.username|capfirst }}</b></p>
     <p>{{ blog.texto|safe }}</p> 
     <p><br><b><i>Creado</b> {{ blog.fechaCreado}}</i></p>
 
 
     
     {% if comentarios %}
-        <h2>Comentarios</h2>
+    <h2>Comentarios</h2>
         <ul>
             {% for comentario in comentarios %}
-                <li>{{ comentario.autor }}: {{ comentario.texto }}</li>
+                <li><b>{{ comentario.autor|capfirst }}</b>: {{ comentario.texto }} <br><b><i>Enviado</i></b> {{ comentario.fechaCreado}}</li>
             {% endfor %}
         </ul>
-    {% else %}
-        <h3>Deja un comentario</h3>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Enviar</button>
-        </form>
     {% endif %}
+
+<h5>Deja un comentario</h5>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
 
 {% endblock %}

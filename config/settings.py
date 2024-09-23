@@ -166,8 +166,17 @@ customColorPalette = [
 CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
 CKEDITOR_5_CONFIGS = {
     'texto': {
-      'toolbar': ['heading', '|', 'bold', 'italic', 'link',
-                  'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+      'toolbar': ['heading','|','bold','italic','underline','strikethrough',
+        '|','link','imageUpload','|',
+        'bulletedList','numberedList','|',
+        'undo','redo','removeFormat'],
+      'language': 'es',
+  },
+    'coment': {
+      'toolbar': ['heading','|','bold','italic','underline','strikethrough',
+        '|','link','imageUpload','|',
+        'bulletedList','numberedList','|',
+        'undo','redo','removeFormat'],
       'language': 'es',
   },
     'extends': {

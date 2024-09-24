@@ -12,7 +12,7 @@
         <h2>{{ post.titulo }}</h2>
         <p><b>Autor</b> {{ post.autor.username|capfirst }}</p>
         <p>{{ post.texto|safe }}</p> 
-        <p><br><b><i>Creado</b> {{ post.fechaCreado}}</i></p>
+        <p><br><b><i>Creado</b> {{ post.fechaCreado}}</i></p>               <!--Información del post, o los posts, a eliminar-->
     </li>
     {% endfor %}
 </ul>

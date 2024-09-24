@@ -7,10 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.messages import success
 from django_ckeditor_5.widgets import CKEditor5Widget
-from django.core import paginator
 
 
-# Create your views here.
 
 class RegistroUsuario(CreateView):
     template_name = 'registration/registro.html'   #por defecto se deja en template y se llama de manera normal, por separarlo y unificar el login/registro, lo modifico a la ruta "/registration" y lo llamo la ruta de esta manera
@@ -56,25 +54,24 @@ class BlogContenido(DetailView):
     model = Blog
     template_name = 'blog_contenido.html'         
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):                           #método heredado de la clase View, para renderizar y procesar vistas
+        context = super().get_context_data(**kwargs)            #context = diccionario | **kwargs = argumentos claves
 
         if self.object:             
-            context['comentarios'] = self.object.comentarios.all()          #mira los objetos con este context en este post
-            context['form'] = ComentarioForm()
-        context['blog_content'] = self.object.texto     #agrega el context al post
+            context['comentarios'] = self.object.comentarios.all()          #si existe, se basa en la clave 'comentarios'
+            context['form'] = ComentarioForm()                              #se crea con el formulario de más abajo
+        context['blog_content'] = self.object.texto             #agrega el context al post
         return context
     
-    def post(self, request, *args, **kwargs):
-        # No se necesita el argumento 'slug' aquí
-        self.object = self.get_object()
+    def post(self, request):
+        self.object = self.get_object()                 #recibe y almacena el objeto pedido
         form = ComentarioForm(request.POST)
-        if form.is_valid():
+        if form.is_valid():                             #comprobación del formulario válido, agregado tras algún error pasado
             comentario = form.save(commit=False)
             comentario.blog = self.object
             comentario.autor = request.user
             comentario.save()
-            return redirect('blog_contenido', slug=self.object.slug)
+            return redirect('blog_contenido', slug=self.object.slug)                  
         return self.render_to_response(self.get_context_data(form=form))
 
 
@@ -83,8 +80,8 @@ class ComentarioForm(forms.ModelForm):
         model = Comentarios
         fields = ['texto']
         widgets = {
-            'blog': forms.HiddenInput(),
-        }
+            'blog': forms.HiddenInput(),                #se esconde el "blog" de comentarios, para no mostrarse a la hora de crear un comentario
+        }                                               #solía salir cómo opción a elegir el post a comentar, y era innecesario ya que el comentario tenía la "id" del post
 
     
 
@@ -110,7 +107,6 @@ class MisPosts(LoginRequiredMixin, View):
             # Mostrar la página de confirmación
             posts_seleccion = Blog.objects.filter(pk__in=seleccion, autor=request.user)
             return render(request, 'confirmar_eliminacion.html', {'posts_seleccion': posts_seleccion})
-
 
 
 

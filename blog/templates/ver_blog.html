@@ -12,7 +12,7 @@
                 <a href="{% url 'blog_contenido' blog.slug %}">
                     <h2><b>{{ blog.titulo }}</b></h2> 
                 </a>    
-                    <span class="author"><b>{{ blog.autor.username|capfirst }}</b></span>
+                    <span class="author"><b>{{ blog.autor.username|capfirst }}</b></span>               
                     <br>
                     <span class="fecha">Fecha de creación: {{ blog.fechaCreado }}</span>
                 
@@ -22,6 +22,8 @@
         {% endfor %}
     </ul>
 
+
+    
     <!--Paginación-->
 
     {% if page_obj.has_other_pages %}

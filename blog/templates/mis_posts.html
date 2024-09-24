@@ -14,7 +14,7 @@
             <input type="checkbox" name="seleccion" value="{{ post.pk }}">
             <b>Titulo </b>{{ post.titulo }}
             <br><br> {{post.texto }}
-            <br><i>Creado {{ post.fechaCreado}}</i>
+            <br><i>Creado {{ post.fechaCreado}}</i>                             <!--posts de cada usuario, con la posibilidad de eliminarlos-->
         </li>
         {% endfor %}
     </ul>

@@ -10,10 +10,11 @@
     <h2>{{ blog.titulo }}</h2>
     <p><b>{{ blog.autor.username|capfirst }}</b></p>
     <p>{{ blog.texto|safe }}</p> 
-    <p><br><b><i>Creado</b> {{ blog.fechaCreado}}</i></p>
+    <p><br><b><i>Creado</b> {{ blog.fechaCreado}}</i></p>                   <!--descripción detallada del post seleccionado-->
 
 
     
+    <!--sección de comentarios-->
     {% if comentarios %}
     <h2>Comentarios</h2>
         <ul>

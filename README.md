@@ -14,17 +14,17 @@ Con registro e inicio de sesión necesario para poder utilizarlo.
 ---SECCIONES---
 
 
--Inicio.
+-Inicio:
 Breve descripción del trabajo.
 
 
--Muro
+-Muro:
 Todos los posts que se encuentran cargados por los usuarios, generado de forma manual para poder visualizar la forma del blog, sus post y comentarios.
 
 
--Crear Post (necesario estar registrado).
+-Crear Post (necesario estar registrado):
 Simple, con un título y el comentario a agregar.
 
 
--Mis Posts (necesario estar registrado).
+-Mis Posts (necesario estar registrado):
 Los posts creados de cada usuario, visualizados solamente por los mismos. Con la posibilidad de eliminarlos.
